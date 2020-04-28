@@ -7,8 +7,9 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -rf /var/lib/apt/lists && \
     rm -f /var/www/html/index.html && \
     sed -i 's/^session.save_handler = files/session.save_handler = redis/g' /etc/php/7.3/apache2/php.ini && \
-    sed -i '/session.save_handler/a session.save_path = "tcp:\/\/redis:6379"/g' /etc/php/7.3/apache2/php.ini
-
+    sed -i '/session.save_handler/a session.save_path = "tcp:\/\/redis:6379"/g' /etc/php/7.3/apache2/php.ini && \
+    wget -O- https://wordpress.org/latest.tar.gz | tar --strip-components=1 -C /var/www/html/ zxv
+    
 
 EXPOSE 80
 
